@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>午餐选择器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        #result {
+            margin-top: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            min-height: 40px;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>午餐选择器</h1>
+        <button onclick="chooseLunch()">点击选择午餐</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const lunchOptions = [
+            "米饭", "面条", "包子", "饺子", "炒饭", 
+            "汉堡", "披萨", "寿司", "沙拉", "火锅",
+            "烤肉", "炸鸡", "牛排", "三明治", "粥",
+            "煎饼果子", "麻辣烫", "盖浇饭", "凉皮", "羊肉串"
+        ];
+        
+        function chooseLunch() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = "正在思考...";
+            
+            // 添加动画效果
+            let counter = 0;
+            const maxIterations = 15; // 动画持续时间
+            
+            const animation = setInterval(() => {
+                const randomIndex = Math.floor(Math.random() * lunchOptions.length);
+                resultDiv.textContent = lunchOptions[randomIndex];
+                
+                if(counter >= maxIterations) {
+                    clearInterval(animation);
+                    const finalChoice = lunchOptions[Math.floor(Math.random() * lunchOptions.length)];
+                    resultDiv.textContent = `今天吃：${finalChoice}`;
+                }
+                counter++;
+            }, 100); // 每100毫秒切换一次
+        }
+    </script>
+</body>
+</html>
